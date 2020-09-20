@@ -1,0 +1,15 @@
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+dist/
+
+# misc
+.env
+*.db

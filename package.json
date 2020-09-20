@@ -1,0 +1,36 @@
+{
+  "name": "auth-flow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A sample project with an authentication flow",
+  "scripts": {},
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "keywords": [],
+  "author": {
+    "name": "Ryan Dsouza",
+    "email": "dsouza.ryan.11@gmail.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "server/**/*.{js,ts}": "yarn workspace @auth-flow/client lint",
+    "*.{ts,tsx,js,css,json,md}": "prettier --write"
+  }
+}
