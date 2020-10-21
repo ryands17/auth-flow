@@ -22,7 +22,8 @@ jobs:
       - name: Use parent cached node_modules
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            **/node_modules
           key: nodeModules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             nodeModules-

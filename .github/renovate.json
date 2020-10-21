@@ -1,0 +1,45 @@
+{
+  "extends": ["config:base"],
+  "masterIssue": true,
+  "automerge": true,
+  "schedule": ["every weekend"],
+  "ignoreDeps": ["react-dom", "react-router-dom"],
+  "packageRules": [
+    {
+      "packagePatterns": ["husky", "lint-staged", "prettier"],
+      "groupName": "main-hooks"
+    },
+    {
+      "packagePatterns": ["@prisma/*"],
+      "groupName": "server-prisma"
+    },
+    {
+      "packagePatterns": ["fastify*"],
+      "groupName": "server-fastify"
+    },
+    {
+      "packagePatterns": ["^@types/", "typesync"],
+      "groupName": "server-ts-types"
+    },
+    {
+      "packagePatterns": ["^eslint", "^@typescript-eslint/"],
+      "groupName": "server-lint"
+    },
+    {
+      "packagePatterns": ["^jest", "ts-jest"],
+      "groupName": "server-test-utils"
+    },
+    {
+      "packagePatterns": ["react", "react-dom"],
+      "groupName": "client-react"
+    },
+    {
+      "packagePatterns": ["@testing-library/*"],
+      "groupName": "client-test-utils"
+    },
+    {
+      "packagePatterns": ["react-scripts", ".*craco"],
+      "groupName": "client-bootstrapping"
+    }
+  ]
+}

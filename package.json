@@ -32,7 +32,6 @@
     }
   },
   "lint-staged": {
-    "server/**/*.{js,ts}": "yarn workspace @auth/server lint",
     "*.{ts,tsx,js,css,json,md}": "prettier --write"
   }
 }

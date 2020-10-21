@@ -27,6 +27,7 @@
     "dev": "craco start",
     "build": "craco build",
     "test": "echo \"client test\"",
+    "lint": "eslint --cache --fix",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
