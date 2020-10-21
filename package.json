@@ -15,9 +15,9 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5"
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.2",
+    "prettier": "^2.1.2"
   },
   "prettier": {
     "semi": false,
@@ -30,7 +30,7 @@
     }
   },
   "lint-staged": {
-    "server/**/*.{js,ts}": "yarn workspace @auth-flow/client lint",
+    "server/**/*.{js,ts}": "yarn workspace @auth/server lint",
     "*.{ts,tsx,js,css,json,md}": "prettier --write"
   }
 }

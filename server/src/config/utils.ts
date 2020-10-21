@@ -1,10 +1,19 @@
 import { promisify } from 'util'
-import express from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify'
 
 export const hash = promisify(bcrypt.hash)
 export const compare = promisify(bcrypt.compare)
+
+export const envs = {
+  NODE_ENV: process.env.NODE_ENV,
+  PORT: process.env.PORT || '4000',
+  JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
+  JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
+}
+
+export const isDev = () => envs.NODE_ENV === 'development'
 
 export const createAuthTokens = (data: any) => {
   return Promise.all([
@@ -17,36 +26,29 @@ export const createAuthTokens = (data: any) => {
   ])
 }
 
-export const validateRequest = async (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
+export const validateRequest = (
+  req: FastifyRequest,
+  res: FastifyReply,
+  done: HookHandlerDoneFunction
 ) => {
   try {
-    const token = req.header('Authorization')?.replace('Bearer ', '') || ''
-    await jwt.verify(token, TOKENS.ACCESS.secret)
-    next()
+    const token =
+      (req.headers['authorization'] as string)?.replace('Bearer ', '') || ''
+    jwt.verify(token, TOKENS.ACCESS.secret)
+    done()
   } catch (e) {
-    return res.status(401).json({
+    return res.status(401).send({
       error: 'Unauthorized request!',
     })
   }
 }
 
-export const validateRefreshToken = async (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-) => {
+export const validateRefreshToken = (refreshToken: string) => {
   try {
-    const { refreshToken } = req.cookies
-    const decoded: any = await jwt.verify(refreshToken, TOKENS.REFRESH.secret)
-    res.locals['email'] = decoded.email
-    next()
+    const decoded: any = jwt.verify(refreshToken, TOKENS.REFRESH.secret)
+    return decoded.email
   } catch (e) {
-    return res.status(401).json({
-      error: 'Unauthorized request!',
-    })
+    throw new Error('Unauthorized request!')
   }
 }
 
@@ -59,11 +61,11 @@ const TOKENS = {
   ACCESS: {
     type: 'access',
     expiresIn: '5m',
-    secret: process.env.JWT_ACCESS_SECRET || '',
+    secret: envs.JWT_ACCESS_SECRET || '',
   },
   REFRESH: {
     type: 'refresh',
     expiresIn: '15m',
-    secret: process.env.JWT_REFRESH_SECRET || '',
+    secret: envs.JWT_REFRESH_SECRET || '',
   },
 }
