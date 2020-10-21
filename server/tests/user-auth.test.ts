@@ -2,6 +2,7 @@ import supertest from 'supertest'
 import { app } from './helpers'
 
 let accessToken = ''
+let refreshToken: string[] = []
 
 test('signup', async () => {
   const res = await supertest(app.server)
@@ -39,6 +40,7 @@ test('login', async () => {
 
   expect(res.body).toHaveProperty('data.user')
   expect(res.body).toHaveProperty('data.accessToken')
+  refreshToken = res.headers['set-cookie']
   accessToken = res.body.data.accessToken
 })
 
@@ -51,4 +53,15 @@ test('list users', async () => {
 
   expect(res.body).toHaveProperty('data.users')
   expect(res.body.data.users).toHaveLength(1)
+})
+
+test('request new access token', async () => {
+  const res = await supertest(app.server)
+    .get('/request-access-token')
+    .set({ Accept: 'application/json', Cookie: refreshToken })
+    .expect('Content-Type', /json/)
+    .expect(200)
+
+  expect(res.body).toHaveProperty('data.accessToken')
+  expect(res.body.data.accessToken).toBeDefined()
 })
