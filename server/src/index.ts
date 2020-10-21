@@ -7,7 +7,7 @@ import cookieParser from 'fastify-cookie'
 import { app } from './app'
 import { envs } from './config/utils'
 
-const start = async (app: FastifyInstance) => {
+export const start = async (app: FastifyInstance) => {
   try {
     app.register(helmet)
     app.register(cors)

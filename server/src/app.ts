@@ -5,8 +5,8 @@ import { isDev } from './config/utils'
 import * as schemaParsers from './config/schema'
 import type * as schemaTypes from './config/schema'
 
-const prisma = new PrismaClient({
-  log: ['query'],
+export const prisma = new PrismaClient({
+  log: isDev() ? ['query'] : [],
 })
 
 export const app = fastify({

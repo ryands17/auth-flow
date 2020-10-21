@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "A sample project with an authentication flow",
-  "scripts": {},
+  "scripts": {
+    "test": "yarn workspaces run test"
+  },
   "workspaces": [
     "client",
     "server"

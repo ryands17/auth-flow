@@ -26,7 +26,7 @@
   "scripts": {
     "dev": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "echo \"client test\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
