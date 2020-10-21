@@ -33,5 +33,5 @@ jobs:
       - name: Lint and Test
         run: yarn test
         env:
-          - JWT_ACCESS_SECRET: access_secret
-          - JWT_REFRESH_SECRET: refresh_secret
+          JWT_ACCESS_SECRET: access_secret
+          JWT_REFRESH_SECRET: refresh_secret
