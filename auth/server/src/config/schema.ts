@@ -1,4 +1,5 @@
 import * as z from 'zod'
+import type { User } from '@prisma/client'
 
 export const SignupPayload = z.object({
   name: z.string().nullable(),
@@ -8,6 +9,11 @@ export const SignupPayload = z.object({
 
 export type SignupBody = z.infer<typeof SignupPayload>
 
+export type LoginResponse = {
+  user: User
+  accessToken: string
+}
+
 export const LoginPayload = z.object({
   email: z.string(),
   password: z.string(),
@@ -15,4 +21,4 @@ export const LoginPayload = z.object({
 
 export type LoginBody = z.infer<typeof LoginPayload>
 
-export type { User } from '@prisma/client'
+export type { User }

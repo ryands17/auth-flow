@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { Card, Form, Input, Button, message } from 'antd'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
 import { routes } from 'config/routes'
-import { login } from 'config/utils'
+import { auth } from 'config/utils'
 import { LoginBody } from 'server/src/config/schema'
 
 const layout = {
@@ -21,11 +21,10 @@ const Login = () => {
   const success = async (values: LoginBody) => {
     try {
       loading(true)
-      await login(values)
+      await auth.login(values)
       navigate(routes.home.path)
     } catch (e) {
       message.error(e.toString())
-    } finally {
       loading(false)
     }
   }

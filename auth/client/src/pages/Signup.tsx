@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Card, Form, Input, Button, message } from 'antd'
 import { useNavigate, Link } from 'react-router-dom'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
-import { signup } from 'config/utils'
+import { auth } from 'config/utils'
 import { routes } from 'config/routes'
 import { SignupBody } from 'server/src/config/schema'
 
@@ -21,11 +21,10 @@ const Signup = () => {
   const success = async (values: SignupBody) => {
     try {
       loading(true)
-      await signup(values)
+      await auth.signup(values)
       navigate(routes.login.path)
     } catch (e) {
       message.error(e.toString())
-    } finally {
       loading(false)
     }
   }
