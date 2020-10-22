@@ -19,7 +19,7 @@ test(`validations are loaded properly`, async () => {
   renderWithRouter(<Signup />)
 
   fireEvent.click(screen.getByRole('button'))
-  await waitFor(() => screen.getAllByRole('alert'))
-
-  expect(screen.getAllByRole('alert')).toHaveLength(3)
+  await waitFor(() => {
+    expect(screen.getAllByRole('alert')).toHaveLength(3)
+  })
 })

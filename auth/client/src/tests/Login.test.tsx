@@ -22,7 +22,7 @@ test(`validations are loaded properly`, async () => {
   // })
 
   fireEvent.click(screen.getByRole('button'))
-  await waitFor(() => screen.getAllByRole('alert'))
-
-  expect(screen.getAllByRole('alert')).toHaveLength(2)
+  await waitFor(() => {
+    expect(screen.getAllByRole('alert')).toHaveLength(2)
+  })
 })
