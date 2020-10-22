@@ -14,3 +14,5 @@ export const LoginPayload = z.object({
 })
 
 export type LoginBody = z.infer<typeof LoginPayload>
+
+export type { User } from '@prisma/client'

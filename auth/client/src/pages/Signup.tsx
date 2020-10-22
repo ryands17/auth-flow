@@ -1,8 +1,10 @@
 import * as React from 'react'
-import { Card, Form, Input, Button } from 'antd'
-import { Store } from 'antd/lib/form/interface'
+import { Card, Form, Input, Button, message } from 'antd'
+import { useNavigate, Link } from 'react-router-dom'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
-import { sleep } from 'config/utils'
+import { signup } from 'config/utils'
+import { routes } from 'config/routes'
+import { SignupBody } from 'server/src/config/schema'
 
 const layout = {
   labelCol: { span: 8 },
@@ -13,13 +15,19 @@ const tailLayout = {
 }
 
 const Signup = () => {
+  const navigate = useNavigate()
   const [isLoading, loading] = React.useState(false)
 
-  const success = async (values: Store) => {
-    loading(true)
-    await sleep()
-    console.log('Success:', values)
-    loading(false)
+  const success = async (values: SignupBody) => {
+    try {
+      loading(true)
+      await signup(values)
+      navigate(routes.login.path)
+    } catch (e) {
+      message.error(e.toString())
+    } finally {
+      loading(false)
+    }
   }
 
   const failure = (errorInfo: ValidateErrorEntity) => {
@@ -44,6 +52,15 @@ const Signup = () => {
           onFinishFailed={failure}
         >
           <Form.Item
+            label="Name"
+            name="name"
+            rules={[{ required: true }]}
+            required
+          >
+            <Input placeholder="John Doe" />
+          </Form.Item>
+
+          <Form.Item
             label="Email"
             name="email"
             required
@@ -62,9 +79,19 @@ const Signup = () => {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button loading={isLoading} type="primary" htmlType="submit">
-              Signup
-            </Button>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Button loading={isLoading} type="primary" htmlType="submit">
+                Signup
+              </Button>
+
+              <Link to={routes.login.path}>Login</Link>
+            </div>
           </Form.Item>
         </Form>
       </Card>

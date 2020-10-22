@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, Link } from 'react-router-dom'
 import { Card, Form, Input, Button, message } from 'antd'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
 import { routes } from 'config/routes'
@@ -70,9 +70,19 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button loading={isLoading} type="primary" htmlType="submit">
-              Login
-            </Button>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Button loading={isLoading} type="primary" htmlType="submit">
+                Login
+              </Button>
+
+              <Link to={routes.signup.path}>Signup</Link>
+            </div>
           </Form.Item>
         </Form>
       </Card>
