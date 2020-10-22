@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      SKIP_PREFLIGHT_CHECK: 'true'
 
     steps:
       - name: Checkout
