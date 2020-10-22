@@ -12,7 +12,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 }
 
-const Login = () => {
+const Signup = () => {
   const [isLoading, loading] = React.useState(false)
 
   const success = async (values: Store) => {
@@ -63,7 +63,7 @@ const Login = () => {
 
           <Form.Item {...tailLayout}>
             <Button loading={isLoading} type="primary" htmlType="submit">
-              Submit
+              Signup
             </Button>
           </Form.Item>
         </Form>
@@ -72,4 +72,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Signup

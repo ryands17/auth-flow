@@ -11,6 +11,4 @@
 dist/
 
 # misc
-.env
-.env.test
 *.db

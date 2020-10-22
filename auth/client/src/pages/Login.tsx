@@ -1,8 +1,10 @@
 import * as React from 'react'
-import { Card, Form, Input, Button } from 'antd'
-import { Store } from 'antd/lib/form/interface'
+import { useNavigate } from 'react-router'
+import { Card, Form, Input, Button, message } from 'antd'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
-import { sleep } from 'config/utils'
+import { routes } from 'config/routes'
+import { login } from 'config/utils'
+import { LoginBody } from 'server/src/config/schema'
 
 const layout = {
   labelCol: { span: 8 },
@@ -12,14 +14,20 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 }
 
-const Signup = () => {
+const Login = () => {
+  const navigate = useNavigate()
   const [isLoading, loading] = React.useState(false)
 
-  const success = async (values: Store) => {
-    loading(true)
-    await sleep()
-    console.log('Success:', values)
-    loading(false)
+  const success = async (values: LoginBody) => {
+    try {
+      loading(true)
+      await login(values)
+      navigate(routes.home.path)
+    } catch (e) {
+      message.error(e.toString())
+    } finally {
+      loading(false)
+    }
   }
 
   const failure = (errorInfo: ValidateErrorEntity) => {
@@ -36,7 +44,7 @@ const Signup = () => {
       }}
     >
       <Card style={{ width: 500 }}>
-        <h2>Signup</h2>
+        <h2>Login</h2>
         <Form
           {...layout}
           name="signup"
@@ -63,7 +71,7 @@ const Signup = () => {
 
           <Form.Item {...tailLayout}>
             <Button loading={isLoading} type="primary" htmlType="submit">
-              Submit
+              Login
             </Button>
           </Form.Item>
         </Form>
@@ -72,4 +80,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Login
