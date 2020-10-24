@@ -3,7 +3,7 @@
   "masterIssue": true,
   "automerge": true,
   "schedule": ["every weekend"],
-  "ignoreDeps": ["react-dom", "react-router-dom"],
+  "ignoreDeps": ["react-router", "react-router-dom"],
   "packageRules": [
     {
       "packagePatterns": ["husky", "lint-staged", "prettier"],
