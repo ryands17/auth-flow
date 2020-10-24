@@ -15,6 +15,12 @@ export const app = fastify({
   },
 })
 
+app.addHook('onSend', (req, res, payload, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header('Access-Control-Allow-Credentials', true)
+  next()
+})
+
 app.get('/', (_req, res) => {
   res.send({
     data: 'API functional!',
@@ -64,16 +70,18 @@ app.post<{ Body: schemaTypes.LoginBody }>('/login', async (req, res) => {
   const { password: _pass, ...rest } = user
   const [accessToken, refreshToken] = await utils.createAuthTokens({ email })
 
-  res
-    .setCookie('refreshToken', refreshToken, {
-      httpOnly: true,
-    })
-    .send({
-      data: {
-        user: rest,
-        accessToken,
-      },
-    })
+  res.setCookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    sameSite: true,
+    signed: true,
+  })
+
+  res.send({
+    data: {
+      user: rest,
+      accessToken,
+    },
+  })
 })
 
 app.get('/request-access-token', (req, res) => {
