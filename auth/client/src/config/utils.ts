@@ -26,8 +26,8 @@ api.interceptors.request.use(config => {
 export const auth = {
   login: async (data: types.LoginBody) => {
     try {
-      const res: types.LoginResponse = (await api.post('/login', data)).data
-        .data
+      const res: types.LoginResponse = (await api.post('/auth/login', data))
+        .data.data
       setToken(res.accessToken)
       return res
     } catch (e) {
@@ -36,7 +36,7 @@ export const auth = {
   },
   signup: async (data: types.SignupBody) => {
     try {
-      const res = await api.post('/signup', data)
+      const res = await api.post('/auth/signup', data)
       return res.data
     } catch (e) {
       throwError(e)
@@ -49,7 +49,7 @@ export const auth = {
 
 export const getAllUsers = async () => {
   try {
-    const res = await api.get('/users')
+    const res = await api.get('/user')
     return res.data.data
   } catch (e) {
     throwError(e)
