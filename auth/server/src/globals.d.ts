@@ -4,5 +4,6 @@ declare namespace NodeJS {
     JWT_ACCESS_SECRET: string
     JWT_REFRESH_SECRET: string
     PORT?: string
+    HOST?: string
   }
 }

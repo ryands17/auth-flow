@@ -11,7 +11,7 @@ import { envs } from './config/utils'
 export const start = async (app: FastifyInstance) => {
   try {
     app.register(helmet)
-    app.register(cors)
+    app.register(cors, { credentials: true, origin: envs.HOST })
     app.register(cookieParser)
     await buildRoutes(app)
     await app.listen(envs.PORT)

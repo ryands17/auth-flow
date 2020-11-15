@@ -12,6 +12,7 @@ export const envs = {
   PORT: process.env.PORT || '4000',
   JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
+  HOST: 'http://localhost:3000',
 }
 
 export const isDev = () => envs.NODE_ENV === 'development'
