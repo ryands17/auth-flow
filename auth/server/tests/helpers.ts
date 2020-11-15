@@ -1,9 +1,11 @@
 import { FastifyInstance } from 'fastify'
-import { app, prisma } from '../src/app'
+import { app, buildRoutes } from '../src/app'
+import { prisma } from '../src/config/utils'
 import cookieParser from 'fastify-cookie'
 
 const start = async (app: FastifyInstance) => {
   try {
+    await buildRoutes(app)
     app.register(cookieParser)
   } catch (err) {
     console.log('e', err)

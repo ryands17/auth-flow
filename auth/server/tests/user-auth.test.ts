@@ -6,7 +6,7 @@ let refreshToken: string[] = []
 
 test('signup', async () => {
   const res = await supertest(app.server)
-    .post('/signup')
+    .post('/auth/signup')
     .send({
       email: 'user@g.com',
       password: 'password',
@@ -29,7 +29,7 @@ test('signup', async () => {
 
 test('login', async () => {
   const res = await supertest(app.server)
-    .post('/login')
+    .post('/auth/login')
     .send({
       email: 'user@g.com',
       password: 'password',
@@ -46,7 +46,7 @@ test('login', async () => {
 
 test('list users', async () => {
   const res = await supertest(app.server)
-    .get('/users')
+    .get('/user')
     .set({ Authorization: `Bearer ${accessToken}`, Accept: 'application/json' })
     .expect('Content-Type', /json/)
     .expect(200)
@@ -57,7 +57,7 @@ test('list users', async () => {
 
 test('request new access token', async () => {
   const res = await supertest(app.server)
-    .get('/request-access-token')
+    .get('/auth/refresh-token')
     .set({ Accept: 'application/json', Cookie: refreshToken })
     .expect('Content-Type', /json/)
     .expect(200)

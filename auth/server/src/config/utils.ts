@@ -1,6 +1,7 @@
 import { promisify } from 'util'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { PrismaClient } from '@prisma/client'
 import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify'
 
 export const hash = promisify(bcrypt.hash)
@@ -14,6 +15,10 @@ export const envs = {
 }
 
 export const isDev = () => envs.NODE_ENV === 'development'
+
+export const prisma = new PrismaClient({
+  log: isDev() ? ['query'] : [],
+})
 
 export const createAuthTokens = (data: any) => {
   return Promise.all([
