@@ -53,6 +53,7 @@ const user: FastifyPluginCallback = (app, opts, next) => {
     res
       .setCookie('refreshToken', refreshToken, {
         httpOnly: true,
+        sameSite: 'lax',
         path: '/',
       })
       .send({
