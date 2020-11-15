@@ -20,6 +20,7 @@ const api = axios.create({
 
 api.interceptors.request.use(config => {
   config.headers['Authorization'] = `Bearer ${fetchToken()}`
+  config.withCredentials = true
   return config
 })
 
