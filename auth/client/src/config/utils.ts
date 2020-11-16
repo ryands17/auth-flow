@@ -24,6 +24,31 @@ api.interceptors.request.use(config => {
   return config
 })
 
+const tokenInterceptor = api.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response.status !== 401) {
+      return Promise.reject(error)
+    }
+    api.interceptors.response.eject(tokenInterceptor)
+
+    return auth
+      .refreshToken()
+      .then(res => {
+        console.log('[after] refresh token', res)
+        setToken(res)
+        error.response.config.headers[
+          'Authorization'
+        ] = `Bearer ${fetchToken()}`
+        return api(error.response.config)
+      })
+      .catch(err => {
+        setToken(null)
+        return Promise.reject(err)
+      })
+  }
+)
+
 export const auth = {
   login: async (data: types.LoginBody) => {
     try {
@@ -39,6 +64,14 @@ export const auth = {
     try {
       const res = await api.post('/auth/signup', data)
       return res.data
+    } catch (e) {
+      throwError(e)
+    }
+  },
+  refreshToken: async () => {
+    try {
+      const res = await api.get('/auth/refresh-token')
+      return res.data?.data?.accessToken
     } catch (e) {
       throwError(e)
     }
