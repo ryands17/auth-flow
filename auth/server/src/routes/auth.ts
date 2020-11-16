@@ -1,4 +1,5 @@
 import type { FastifyPluginCallback } from 'fastify'
+import ms from 'ms'
 import * as utils from '../config/utils'
 import * as schemaParsers from '../config/schema'
 import type * as schemaTypes from '../config/schema'
@@ -53,8 +54,10 @@ const user: FastifyPluginCallback = (app, opts, next) => {
     res
       .setCookie('refreshToken', refreshToken, {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'strict',
         path: '/',
+        secure: !utils.isDev(),
+        expires: new Date(Date.now() + ms(utils.TOKENS.REFRESH.expiresIn)),
       })
       .send({
         data: {

@@ -63,7 +63,7 @@ export const createNewAccessToken = (data: any) =>
     expiresIn: TOKENS.ACCESS.expiresIn,
   })
 
-const TOKENS = {
+export const TOKENS = {
   ACCESS: {
     type: 'access',
     expiresIn: '5m',

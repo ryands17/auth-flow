@@ -12,12 +12,6 @@ export const app = fastify({
   },
 })
 
-app.addHook('onSend', (req, res, payload, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-  res.header('Access-Control-Allow-Credentials', true)
-  next()
-})
-
 export const buildRoutes = async (app: FastifyInstance) => {
   const folder = './routes'
   const files = await glob('*.{js,ts}', { cwd: path.join(__dirname, folder) })
