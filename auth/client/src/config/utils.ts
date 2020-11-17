@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as types from 'server/src/config/schema'
+import { logoutOnInvalidToken } from './routes'
 
 const envs = {
   BASE_URL: process.env.BASE_URL || 'http://localhost:4000',
@@ -44,6 +45,7 @@ const tokenInterceptor = api.interceptors.response.use(
       })
       .catch(err => {
         setToken(null)
+        document.body.dispatchEvent(logoutOnInvalidToken)
         return Promise.reject(err)
       })
   }

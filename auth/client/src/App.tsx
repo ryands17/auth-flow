@@ -1,23 +1,38 @@
 import * as React from 'react'
-import { BrowserRouter, Routes } from 'react-router-dom'
-import { renderRoutes } from 'config/routes'
+import { BrowserRouter, Routes, useNavigate } from 'react-router-dom'
+import { renderRoutes, routes } from 'config/routes'
 
 export const App = () => {
-  return <AppRoutes />
-}
-
-const AppRoutes = () => {
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
       <BrowserRouter>
-        <Routes>
-          {renderRoutes.map(([key, value]) => (
-            <value.routeComponent key={key} path={value.path}>
-              <value.element />
-            </value.routeComponent>
-          ))}
-        </Routes>
+        <AppRoutes />
       </BrowserRouter>
     </React.Suspense>
+  )
+}
+
+const AppRoutes = () => {
+  const navigate = useNavigate()
+
+  const logout = React.useCallback(() => {
+    navigate(routes.login.path)
+  }, [navigate])
+
+  React.useEffect(() => {
+    document.body.addEventListener('logoutOnInvalidToken', logout)
+
+    return () =>
+      document.body.removeEventListener('logoutOnInvalidToken', logout)
+  }, [logout])
+
+  return (
+    <Routes>
+      {renderRoutes.map(([key, value]) => (
+        <value.routeComponent key={key} path={value.path}>
+          <value.element />
+        </value.routeComponent>
+      ))}
+    </Routes>
   )
 }

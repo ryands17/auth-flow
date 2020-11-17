@@ -20,3 +20,5 @@ export const routes = {
 }
 
 export const renderRoutes = Object.entries(routes)
+
+export const logoutOnInvalidToken = new Event('logoutOnInvalidToken')
