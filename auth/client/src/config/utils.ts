@@ -25,31 +25,41 @@ api.interceptors.request.use(config => {
   return config
 })
 
-const tokenInterceptor = api.interceptors.response.use(
-  response => response,
-  error => {
-    if (error.response.status !== 401) {
-      return Promise.reject(error)
-    }
-    api.interceptors.response.eject(tokenInterceptor)
+let tokenInterceptor: number | null = null
 
-    return auth
-      .refreshToken()
-      .then(res => {
-        console.log('[after] refresh token', res)
-        setToken(res)
-        error.response.config.headers[
-          'Authorization'
-        ] = `Bearer ${fetchToken()}`
-        return api(error.response.config)
-      })
-      .catch(err => {
-        setToken(null)
-        document.body.dispatchEvent(logoutOnInvalidToken)
-        return Promise.reject(err)
-      })
+const setTokenInterceptor = (value: number | null) => {
+  tokenInterceptor = value
+}
+
+const interceptor = (error: any) => {
+  if (error.response.status !== 401) {
+    return Promise.reject(error)
   }
-)
+  api.interceptors.response.eject(tokenInterceptor as number)
+
+  return auth
+    .refreshToken()
+    .then(res => {
+      console.log('[after] refresh token', res)
+      setToken(res)
+      error.response.config.headers['Authorization'] = `Bearer ${fetchToken()}`
+      registerInterceptor()
+      return api(error.response.config)
+    })
+    .catch(err => {
+      setToken(null)
+      document.body.dispatchEvent(logoutOnInvalidToken)
+      return Promise.reject(err)
+    })
+}
+
+const registerInterceptor = () => {
+  setTokenInterceptor(
+    api.interceptors.response.use(response => response, interceptor)
+  )
+}
+
+registerInterceptor()
 
 export const auth = {
   login: async (data: types.LoginBody) => {
