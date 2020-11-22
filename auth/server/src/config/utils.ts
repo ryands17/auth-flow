@@ -66,12 +66,12 @@ export const createNewAccessToken = (data: any) =>
 export const TOKENS = {
   ACCESS: {
     type: 'access',
-    expiresIn: '5m',
+    expiresIn: '1m',
     secret: envs.JWT_ACCESS_SECRET || '',
   },
   REFRESH: {
     type: 'refresh',
-    expiresIn: '15m',
+    expiresIn: '3m',
     secret: envs.JWT_REFRESH_SECRET || '',
   },
 }
