@@ -69,16 +69,28 @@ const user: FastifyPluginCallback = (app, opts, next) => {
 
   app.get('/refresh-token', (req, res) => {
     const { refreshToken } = req.cookies
-    const email = utils.validateRefreshToken(refreshToken)
-    const accessToken = utils.createNewAccessToken({
-      email,
-    })
+    if (!refreshToken) {
+      res.clearCookie('refreshToken')
+      res.status(401).send({
+        error: 'Unauthorized request!',
+      })
+    } else {
+      const email = utils.validateRefreshToken(refreshToken)
+      const accessToken = utils.createNewAccessToken({
+        email,
+      })
 
-    res.send({
-      data: {
-        accessToken,
-      },
-    })
+      res.send({
+        data: {
+          accessToken,
+        },
+      })
+    }
+  })
+  app.get('/signout', (req, res) => {
+    const { redirect } = req.query as schemaTypes.SignOut
+    res.clearCookie('refreshToken')
+    res.redirect(redirect)
   })
   next()
 }

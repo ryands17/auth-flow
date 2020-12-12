@@ -21,4 +21,8 @@ export const LoginPayload = z.object({
 
 export type LoginBody = z.infer<typeof LoginPayload>
 
+export type SignOut = {
+  redirect: string
+}
+
 export type { User }

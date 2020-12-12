@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { BrowserRouter, Routes, useNavigate } from 'react-router-dom'
 import { renderRoutes, routes } from 'config/routes'
+import { PrivateRoute, PublicRoute } from 'components/ConditionalRoute'
 
 export const App = () => {
   return (
@@ -30,7 +31,15 @@ const AppRoutes = () => {
     <Routes>
       {renderRoutes.map(([key, value]) => (
         <value.routeComponent key={key} path={value.path}>
-          <value.element />
+          {value.private ? (
+            <PrivateRoute>
+              <value.element />
+            </PrivateRoute>
+          ) : (
+            <PublicRoute>
+              <value.element />
+            </PublicRoute>
+          )}
         </value.routeComponent>
       ))}
     </Routes>

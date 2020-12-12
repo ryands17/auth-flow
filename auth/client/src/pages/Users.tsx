@@ -22,7 +22,6 @@ const Users = () => {
       <Button
         onClick={() => {
           auth.signout()
-          navigate(routes.login.path)
         }}
       >
         Sign Out
