@@ -5,12 +5,16 @@ import { logoutOnInvalidToken } from './routes'
 const envs = {
   BASE_URL: process.env.BASE_URL || 'http://localhost:4000',
 }
+export const logoutRoute = () => {
+  const redirect = window.location.origin + '/login'
+  return `${envs.BASE_URL}/auth/signout?redirect=${redirect}`
+}
 
 // in-memory access token
 type Token = string | null
 let token: Token = null
 
-const fetchToken = () => token
+export const fetchToken = () => token
 
 const setToken = (newToken: Token) => (token = newToken)
 
@@ -41,13 +45,11 @@ const interceptor = (error: any) => {
     .refreshToken()
     .then(res => {
       console.log('[after] refresh token', res)
-      setToken(res)
       error.response.config.headers['Authorization'] = `Bearer ${fetchToken()}`
       registerInterceptor()
       return api(error.response.config)
     })
     .catch(err => {
-      setToken(null)
       document.body.dispatchEvent(logoutOnInvalidToken)
       return Promise.reject(err)
     })
@@ -83,13 +85,16 @@ export const auth = {
   refreshToken: async () => {
     try {
       const res = await api.get('/auth/refresh-token')
-      return res.data?.data?.accessToken
+      const token = res.data?.data?.accessToken
+      setToken(token)
     } catch (e) {
+      setToken(null)
       throwError(e)
     }
   },
   signout: () => {
     setToken(null)
+    window.location.href = logoutRoute()
   },
 }
 
