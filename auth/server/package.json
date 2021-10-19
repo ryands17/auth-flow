@@ -31,7 +31,7 @@
     "glob": "7.1.6",
     "jsonwebtoken": "8.5.1",
     "ms": "2.1.3",
-    "zod": "2.0.0-beta.16"
+    "zod": "2.0.0-beta.30"
   },
   "devDependencies": {
     "@prisma/cli": "2.9.0",
