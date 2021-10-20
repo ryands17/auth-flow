@@ -1720,12 +1720,17 @@
   resolved "https://registry.yarnpkg.com/@prisma/cli/-/cli-2.9.0.tgz#c6f6652890783b899f266537e90e69c3481f5474"
   integrity sha512-wPk4ehyTtVM7ZarWs16MhOc6kwLV/gZFardMvUeh46rlBwrklMdKtNChzzPa3wurrUPQ5KTbuRBz5Mgf7AdD/w==
 
-"@prisma/client@2.9.0":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-2.9.0.tgz#acfaca0c5695d7f439e5af54b7cd0f7fb5926340"
-  integrity sha512-VLXw6s13xakIrV9Z8Ftw0j+mbXuvbRkxYv3X5hRZdPN1NAwgeXJmrrTK9MS2HDvW8eGZL7P8OaUSNQ3Sfgvr/Q==
+"@prisma/client@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-3.3.0.tgz#7945101206af1927d925a8d9c62bb188e9260c97"
+  integrity sha512-34tonDW2v74VcG1mx+k/IUGG/eSHKwDiYKfFIZgaPLq/C0h8YQxh7pro272xpOf1pt6duX1Bi90dpGijh1MYgQ==
   dependencies:
-    pkg-up "^3.1.0"
+    "@prisma/engines-version" "3.3.0-30.33838b0f78f1fe9052cf9a00e9761c9dc097a63c"
+
+"@prisma/engines-version@3.3.0-30.33838b0f78f1fe9052cf9a00e9761c9dc097a63c":
+  version "3.3.0-30.33838b0f78f1fe9052cf9a00e9761c9dc097a63c"
+  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-3.3.0-30.33838b0f78f1fe9052cf9a00e9761c9dc097a63c.tgz#10269530152dc126c81b363c27cefc3c060013e2"
+  integrity sha512-g21xPYq0zHoJ/xUkNxIf5Hle0oiDyelZHU8gwq7J3RNVrccjbUZ28S99KT4yUabV8SQQRNSnR0QMLGMv9Eqs/A==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.1"
