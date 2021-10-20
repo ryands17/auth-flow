@@ -38,7 +38,7 @@
     "@types/bcrypt": "10.0.28-alpha",
     "@types/eslint": "7.28.1",
     "@types/glob": "7.2.0",
-    "@types/jest": "26.0.24",
+    "@types/jest": "27.0.2",
     "@types/jsonwebtoken": "8.5.5",
     "@types/ms": "0.7.31",
     "@types/nanoid": "2.1.0",
