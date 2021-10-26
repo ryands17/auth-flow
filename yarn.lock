@@ -6491,21 +6491,21 @@ fast-safe-stringify@^2.0.8:
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.1.1.tgz#c406a83b6e70d9e35ce3b30a81141df30aeba884"
   integrity sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==
 
-fastify-cookie@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/fastify-cookie/-/fastify-cookie-4.2.0.tgz#c9d7f9c16a25f23ef1451f38e53ae7650e210b2e"
-  integrity sha512-BZjgIA143YevEjAwJmqfnJJ5hIonkl49nLBjRLbErFKor/Rd8DZ0xnHnmxSk8xUhnr5g5vxKHnH3/dQt+11cpg==
+fastify-cookie@5.3.1:
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/fastify-cookie/-/fastify-cookie-5.3.1.tgz#97b17f3f297b06ffc8e27fe7a0398aefa9df74f0"
+  integrity sha512-ubiC5ydvgqaXOydeg3G+SFEiTJtsyNPde6ForXi+UG66aDbsHlWNLJTQZg4BopXv+MJ0SzlShGVCWv26mgAwpw==
   dependencies:
     cookie "^0.4.0"
     cookie-signature "^1.1.0"
     fastify-plugin "^3.0.0"
 
-fastify-cors@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/fastify-cors/-/fastify-cors-4.1.0.tgz#ae6e2533f42b033a35da85ed3d585aafd56c2210"
-  integrity sha512-Vr4AgypDkRwG16cs1ORnYItZx6FMN+gCpHvP3/nzNZL1HFzf7U/NaSgmC784VqtK8yiqSXZEoTGCsmzeSp8JVw==
+fastify-cors@6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/fastify-cors/-/fastify-cors-6.0.2.tgz#4fd5102549659e9b34d252fd7ee607b63d021390"
+  integrity sha512-sE0AOyzmj5hLLRRVgenjA6G2iOGX35/1S3QGYB9rr9TXelMZB3lFrXy4CzwYVOMiujJeMiLgO4J7eRm8sQSv8Q==
   dependencies:
-    fastify-plugin "^2.0.0"
+    fastify-plugin "^3.0.0"
     vary "^1.1.2"
 
 fastify-error@^0.3.0:
@@ -6520,13 +6520,6 @@ fastify-helmet@5.3.2:
   dependencies:
     fastify-plugin "^3.0.0"
     helmet "^4.0.0"
-
-fastify-plugin@^2.0.0:
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-2.3.4.tgz#b17abdc36a97877d88101fb86ad8a07f2c07de87"
-  integrity sha512-I+Oaj6p9oiRozbam30sh39BiuiqBda7yK2nmSPVwDCfIBlKnT8YB3MY+pRQc2Fcd07bf6KPGklHJaQ2Qu81TYQ==
-  dependencies:
-    semver "^7.3.2"
 
 fastify-plugin@^3.0.0:
   version "3.0.0"
