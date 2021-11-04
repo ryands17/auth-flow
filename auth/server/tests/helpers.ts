@@ -13,16 +13,14 @@ const start = async (app: FastifyInstance) => {
   }
 }
 
-beforeAll(async done => {
+beforeAll(async () => {
   await start(app)
   await app.ready()
-  done()
 })
 
-afterAll(async done => {
+afterAll(async () => {
   await prisma.$disconnect()
   await app.close()
-  done()
 })
 
 export { app }
